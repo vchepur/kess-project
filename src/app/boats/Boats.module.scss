@@ -1,0 +1,93 @@
+.boatsTitle {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.catalogSection {
+  margin: 40px 0;
+
+  h2 {
+    font-size: 1.8rem;
+    color: #2979ff;
+    margin-bottom: 15px;
+    text-align: left;
+  }
+
+  .boatList {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    position: relative;
+    justify-content: center;
+
+    .boatItem {
+      background-color: #f1f1f1;
+      padding: 20px;
+      border-radius: 10px;
+      width: 220px; /* Фиксированная ширина карточки */
+      height: 220px; /* Высота карточки */
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      z-index: 0;
+      text-decoration: none; // Убирает подчеркивание ссылок
+
+      .content {
+        transition: transform 0.3s ease; /* Отдельный переход для контента */
+      }
+
+      img {
+        display: block;
+        margin: 35px auto 20px auto;
+        object-fit: cover;
+        border-radius: 5px;
+        width: 100%;
+        height: 100px; /* Высота изображения */
+        transition: transform 0.3s ease, margin 0.3s ease; /* Добавлен переход для margin */
+      }
+
+      h3 {
+        font-size: 1.2rem;
+        margin: 0;
+        color: #333;
+        transition: transform 0.3s ease, margin 0.3s ease; /* Переход для увеличения */
+      }
+
+      p {
+        font-size: 0.9rem;
+        color: #555;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        height: 0;
+        overflow: hidden;
+      }
+
+      &:hover {
+        z-index: 10; /* Повышаем z-index для карточки */
+        transform: scale(1.1); /* Увеличиваем саму карточку */
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Тень при наведении */
+        text-decoration: none; // Убирает подчеркивание при наведении
+
+        /* Немного увеличиваем изображение и текст */
+        img {
+          transform: scale(1.05); /* Увеличиваем изображение на 5% */
+          margin: 10px auto 10px auto;
+        }
+
+        h3 {
+          transform: scale(1.05);
+          margin: 5px;/* Увеличиваем текст на 5% */
+        }
+
+        p {
+          opacity: 1; /* Показываем описание */
+          height: auto;
+          margin: 0;
+        }
+      }
+    }
+  }
+}
