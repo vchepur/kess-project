@@ -1,6 +1,6 @@
 // components/ImageGalleryComponent.js
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Lightbox from 'react-awesome-lightbox';
 import 'react-awesome-lightbox/build/style.css';
@@ -13,7 +13,23 @@ export default function ImageGalleryComponent({ images }) {
     const openLightbox = (index) => {
         setCurrentImageIndex(index);
         setIsLightboxOpen(true);
+        document.body.style.overflow = 'hidden'; // Отключаем прокрутку страницы
     };
+
+    const closeLightbox = () => {
+        setIsLightboxOpen(false);
+        document.body.style.overflow = ''; // Включаем прокрутку обратно
+    };
+
+    // Блокируем зум всей страницы на мобильных устройствах
+    useEffect(() => {
+        const viewport = document.querySelector("meta[name=viewport]");
+        viewport.setAttribute(
+            "content",
+            "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+        );
+        return () => viewport.setAttribute("content", "width=device-width, initial-scale=1");
+    }, []);
 
     return (
         <div className={styles.galleryContainer}>
@@ -57,7 +73,9 @@ export default function ImageGalleryComponent({ images }) {
                         title: image.alt,
                     }))}
                     startIndex={currentImageIndex}
-                    onClose={() => setIsLightboxOpen(false)}
+                    onClose={closeLightbox}
+                    zoomable={true} // Разрешаем зум изображения
+                    doubleClickZoom={2} // Зум изображения по двойному нажатию
                 />
             )}
         </div>
