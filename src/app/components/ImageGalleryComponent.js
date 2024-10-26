@@ -1,25 +1,12 @@
-// components/Gallery.js
+// components/ImageGalleryComponent.js
 'use client';
 import { useState } from 'react';
 import Image from 'next/image';
 import Lightbox from 'react-awesome-lightbox';
 import 'react-awesome-lightbox/build/style.css';
-import styles from './Gallery.module.scss';
+import styles from './ImageGalleryComponent.module.scss';
 
-export default function Gallery() {
-    const images = [
-        { src: '/boats/gelex/G4-5/1.jpg', alt: 'Boat 1' },
-        { src: '/boats/gelex/G4-5/2.jpg', alt: 'Boat 2' },
-        { src: '/boats/gelex/G4-5/3.jpg', alt: 'Boat 3' },
-        { src: '/boats/gelex/G4-5/4.jpg', alt: 'Boat 4' },
-        { src: '/boats/gelex/G4-5/5.jpg', alt: 'Boat 5' },
-        { src: '/boats/gelex/G4-5/1.jpg', alt: 'Boat 1' },
-        { src: '/boats/gelex/G4-5/2.jpg', alt: 'Boat 2' },
-        { src: '/boats/gelex/G4-5/3.jpg', alt: 'Boat 3' },
-        { src: '/boats/gelex/G4-5/4.jpg', alt: 'Boat 4' },
-        { src: '/boats/gelex/G4-5/5.jpg', alt: 'Boat 5' },
-    ];
-
+export default function ImageGalleryComponent({ images }) {
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
