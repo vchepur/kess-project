@@ -1,64 +1,67 @@
-// components/useTouchHandlers.js
-import { useState, useEffect } from 'react';
+// components/gallery/useTouchHandlers.js
+import { useState } from 'react';
 
-export default function useTouchHandlers({ onNext, onPrev, setZoom, zoom }) {
+export default function useTouchHandlers({ onNext, onPrev, setZoom }) {
     const [initialTouch, setInitialTouch] = useState(null);
     const [isSwiping, setIsSwiping] = useState(false);
     const [initialDistance, setInitialDistance] = useState(null);
 
-    useEffect(() => {
-        if (zoom > 1) return; // Свайп работает только при zoom = 1
-    }, [zoom]);
-
     const handleTouchStart = (event) => {
-        console.log("Touch Start", event.touches.length);
-
         if (event.touches.length === 1) {
+            // Начало одного касания (для свайпа)
             setInitialTouch({ x: event.touches[0].clientX, y: event.touches[0].clientY });
             setIsSwiping(true);
         } else if (event.touches.length === 2) {
-            const dist = Math.hypot(
-                event.touches[0].clientX - event.touches[1].clientX,
-                event.touches[0].clientY - event.touches[1].clientY
+            // Начало двух касаний (для зума)
+            const touch1 = event.touches[0];
+            const touch2 = event.touches[1];
+            const distance = Math.sqrt(
+                Math.pow(touch2.clientX - touch1.clientX, 2) +
+                Math.pow(touch2.clientY - touch1.clientY, 2)
             );
-            setInitialDistance(dist);
+            setInitialDistance(distance);
+            setIsSwiping(false);
         }
     };
 
     const handleTouchMove = (event) => {
-        console.log("Touch Move", event.touches.length);
-
-        if (!isSwiping || zoom > 1) return;
-
-        if (event.touches.length === 1 && initialTouch) {
+        if (isSwiping && event.touches.length === 1) {
+            // Логика для свайпа
             const deltaX = event.touches[0].clientX - initialTouch.x;
 
+            // Определяем свайп
             if (deltaX > 50) {
                 onPrev();
-                setIsSwiping(false);
+                setIsSwiping(false); // Сброс после свайпа
             } else if (deltaX < -50) {
                 onNext();
-                setIsSwiping(false);
+                setIsSwiping(false); // Сброс после свайпа
             }
-        } else if (event.touches.length === 2 && initialDistance) {
-            const currentDistance = Math.hypot(
-                event.touches[0].clientX - event.touches[1].clientX,
-                event.touches[0].clientY - event.touches[1].clientY
+        } else if (initialDistance && event.touches.length === 2) {
+            // Логика для зума
+            const touch1 = event.touches[0];
+            const touch2 = event.touches[1];
+            const newDistance = Math.sqrt(
+                Math.pow(touch2.clientX - touch1.clientX, 2) +
+                Math.pow(touch2.clientY - touch1.clientY, 2)
             );
-            if (Math.abs(currentDistance - initialDistance) > 10) {
-                setZoom(currentDistance > initialDistance ? zoom + 0.1 : zoom - 0.1);
-                setInitialDistance(currentDistance);
-            }
+
+            // Изменение зума
+            const scaleFactor = newDistance / initialDistance;
+            setZoom(scaleFactor);
         }
     };
 
     const handleTouchEnd = () => {
-        console.log("Touch End");
-
+        // Сброс состояния после окончания жеста
         setIsSwiping(false);
         setInitialTouch(null);
         setInitialDistance(null);
     };
 
-    return { handleTouchStart, handleTouchMove, handleTouchEnd };
+    return {
+        handleTouchStart,
+        handleTouchMove,
+        handleTouchEnd,
+    };
 }

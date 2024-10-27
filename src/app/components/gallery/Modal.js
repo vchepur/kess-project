@@ -1,17 +1,24 @@
+// components/Modal.js
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import CloseButton from './CloseButton';
 import NavigationButton from './NavigationButton';
 import ZoomControls from './ZoomControls';
 import ImageCounter from './ImageCounter';
+import useTouchHandlers from './useTouchHandlers';
 import styles from './imageModal.module.scss';
 
-export default function ImageModal({ images, currentIndex, onClose, onNext, onPrev }) {
+export default function Modal({ images, currentIndex, onClose, onNext, onPrev }) {
     const [zoom, setZoom] = useState(1);
     const [dragPosition, setDragPosition] = useState({ x: 0, y: 0 });
     const [startDragPosition, setStartDragPosition] = useState({ x: 0, y: 0 });
     const [isDragging, setIsDragging] = useState(false);
-    const [initialDistance, setInitialDistance] = useState(null);
+
+    const { handleTouchStart, handleTouchMove, handleTouchEnd } = useTouchHandlers({
+        onNext: () => { setZoom(1); onNext(); }, // Сброс зума при перелистывании
+        onPrev: () => { setZoom(1); onPrev(); },
+        setZoom,
+    });
 
     useEffect(() => {
         const handleKeyDown = (event) => {
@@ -28,54 +35,24 @@ export default function ImageModal({ images, currentIndex, onClose, onNext, onPr
         setDragPosition({ x: 0, y: 0 });
     };
 
-    const handleNext = () => {
-        resetZoomAndPosition();
-        onNext();
-    };
-
-    const handlePrev = () => {
-        resetZoomAndPosition();
-        onPrev();
-    };
-
-    const handleTouchStart = (event) => {
-        if (event.touches.length === 1 && zoom === 1) {
-            // Начало одиночного свайпа
-            setStartDragPosition({ x: event.touches[0].clientX, y: event.touches[0].clientY });
-        } else if (event.touches.length === 2) {
-            // Начало пинч-зумирования
-            const distance = Math.sqrt(
-                Math.pow(event.touches[0].clientX - event.touches[1].clientX, 2) +
-                Math.pow(event.touches[0].clientY - event.touches[1].clientY, 2)
-            );
-            setInitialDistance(distance);
+    const handleMouseDown = (event) => {
+        if (zoom > 1) {
+            setIsDragging(true);
+            setStartDragPosition({ x: event.clientX - dragPosition.x, y: event.clientY - dragPosition.y });
+            event.preventDefault();
         }
     };
 
-    const handleTouchMove = (event) => {
-        if (event.touches.length === 1 && zoom === 1 && startDragPosition) {
-            // Обработка свайпа
-            const deltaX = event.touches[0].clientX - startDragPosition.x;
-            if (Math.abs(deltaX) > 50) { // Чувствительность свайпа
-                if (deltaX > 0) handlePrev();
-                else handleNext();
-                setStartDragPosition(null); // Сбрасываем начальную позицию свайпа
-            }
-        } else if (event.touches.length === 2 && initialDistance) {
-            // Обработка пинч-зумирования
-            const distance = Math.sqrt(
-                Math.pow(event.touches[0].clientX - event.touches[1].clientX, 2) +
-                Math.pow(event.touches[0].clientY - event.touches[1].clientY, 2)
-            );
-            const scale = distance / initialDistance;
-            setZoom(Math.min(Math.max(1, scale), 3)); // Ограничиваем зум от 1x до 3x
+    const handleMouseMove = (event) => {
+        if (isDragging) {
+            setDragPosition({
+                x: event.clientX - startDragPosition.x,
+                y: event.clientY - startDragPosition.y
+            });
         }
     };
 
-    const handleTouchEnd = () => {
-        setInitialDistance(null);
-        setStartDragPosition(null);
-    };
+    const handleMouseUp = () => setIsDragging(false);
 
     return (
         <div className={styles.modal}>
@@ -86,13 +63,16 @@ export default function ImageModal({ images, currentIndex, onClose, onNext, onPr
             <ImageCounter currentIndex={currentIndex} totalImages={images.length} />
 
             <div
-                className={styles.modalImageContainer}
+                className={`${styles.modalImageContainer} ${styles.smoothTransition}`}
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
                 onTouchEnd={handleTouchEnd}
                 style={{
                     transform: `scale(${zoom}) translate(${dragPosition.x}px, ${dragPosition.y}px)`,
-                    cursor: zoom > 1 ? 'grab' : 'default',
+                    cursor: zoom > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default',
                 }}
             >
                 <Image
@@ -105,7 +85,7 @@ export default function ImageModal({ images, currentIndex, onClose, onNext, onPr
                 />
             </div>
 
-            <ZoomControls zoomIn={() => setZoom(Math.min(zoom + 0.2, 3))} zoomOut={() => setZoom(Math.max(zoom - 0.2, 1))} />
+            <ZoomControls onZoomIn={() => setZoom(Math.min(zoom + 0.2, 3))} onZoomOut={() => setZoom(Math.max(zoom - 0.2, 1))} />
         </div>
     );
 }
