@@ -1,0 +1,13 @@
+/* imageCounter.module.scss */
+
+.counter {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  z-index: 200;
+}

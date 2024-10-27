@@ -1,0 +1,11 @@
+/* closeButton.module.scss */
+
+.closeButton {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: #050505;
+  border: none;
+  cursor: pointer;
+  z-index: 200;
+}
