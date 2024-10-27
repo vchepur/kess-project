@@ -1,35 +1,27 @@
-// components/Modal.js
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import CloseButton from './CloseButton';
 import NavigationButton from './NavigationButton';
 import ZoomControls from './ZoomControls';
 import ImageCounter from './ImageCounter';
-import useTouchHandlers from './useTouchHandlers';
 import styles from './imageModal.module.scss';
 
-export default function Modal({ images, currentIndex, onClose, onNext, onPrev }) {
+export default function ImageModal({ images, currentIndex, onClose, onNext, onPrev }) {
     const [zoom, setZoom] = useState(1);
     const [dragPosition, setDragPosition] = useState({ x: 0, y: 0 });
     const [startDragPosition, setStartDragPosition] = useState({ x: 0, y: 0 });
     const [isDragging, setIsDragging] = useState(false);
-    const [isClient, setIsClient] = useState(false);
+    const [initialDistance, setInitialDistance] = useState(null);
 
     useEffect(() => {
-        setIsClient(true);
-    }, []);
-
-    useEffect(() => {
-        if (isClient) {
-            const handleKeyDown = (event) => {
-                if (event.key === 'ArrowRight') handleNext();
-                else if (event.key === 'ArrowLeft') handlePrev();
-                else if (event.key === 'Escape') onClose();
-            };
-            window.addEventListener('keydown', handleKeyDown);
-            return () => window.removeEventListener('keydown', handleKeyDown);
-        }
-    }, [isClient, onNext, onPrev, onClose]);
+        const handleKeyDown = (event) => {
+            if (event.key === 'ArrowRight') handleNext();
+            else if (event.key === 'ArrowLeft') handlePrev();
+            else if (event.key === 'Escape') onClose();
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [onNext, onPrev, onClose]);
 
     const resetZoomAndPosition = () => {
         setZoom(1);
@@ -46,32 +38,44 @@ export default function Modal({ images, currentIndex, onClose, onNext, onPrev })
         onPrev();
     };
 
-    const zoomIn = () => setZoom(prevZoom => Math.min(prevZoom + 0.2, 3));
-    const zoomOut = () => setZoom(prevZoom => Math.max(prevZoom - 0.2, 1));
-
-    const handleMouseDown = (event) => {
-        if (zoom > 1) {
-            setIsDragging(true);
-            setStartDragPosition({ x: event.clientX - dragPosition.x, y: event.clientY - dragPosition.y });
-            event.preventDefault();
+    const handleTouchStart = (event) => {
+        if (event.touches.length === 1 && zoom === 1) {
+            // Начало одиночного свайпа
+            setStartDragPosition({ x: event.touches[0].clientX, y: event.touches[0].clientY });
+        } else if (event.touches.length === 2) {
+            // Начало пинч-зумирования
+            const distance = Math.sqrt(
+                Math.pow(event.touches[0].clientX - event.touches[1].clientX, 2) +
+                Math.pow(event.touches[0].clientY - event.touches[1].clientY, 2)
+            );
+            setInitialDistance(distance);
         }
     };
 
-    const handleMouseMove = (event) => {
-        if (isDragging) {
-            setDragPosition({
-                x: event.clientX - startDragPosition.x,
-                y: event.clientY - startDragPosition.y
-            });
+    const handleTouchMove = (event) => {
+        if (event.touches.length === 1 && zoom === 1 && startDragPosition) {
+            // Обработка свайпа
+            const deltaX = event.touches[0].clientX - startDragPosition.x;
+            if (Math.abs(deltaX) > 50) { // Чувствительность свайпа
+                if (deltaX > 0) handlePrev();
+                else handleNext();
+                setStartDragPosition(null); // Сбрасываем начальную позицию свайпа
+            }
+        } else if (event.touches.length === 2 && initialDistance) {
+            // Обработка пинч-зумирования
+            const distance = Math.sqrt(
+                Math.pow(event.touches[0].clientX - event.touches[1].clientX, 2) +
+                Math.pow(event.touches[0].clientY - event.touches[1].clientY, 2)
+            );
+            const scale = distance / initialDistance;
+            setZoom(Math.min(Math.max(1, scale), 3)); // Ограничиваем зум от 1x до 3x
         }
     };
 
-    const handleMouseUp = () => setIsDragging(false);
-
-    // Используем хук для обработки тач-событий
-    const touchHandlers = useTouchHandlers({ onNext: handleNext, onPrev: handlePrev, setZoom, zoom });
-
-    if (!isClient) return null;
+    const handleTouchEnd = () => {
+        setInitialDistance(null);
+        setStartDragPosition(null);
+    };
 
     return (
         <div className={styles.modal}>
@@ -82,16 +86,13 @@ export default function Modal({ images, currentIndex, onClose, onNext, onPrev })
             <ImageCounter currentIndex={currentIndex} totalImages={images.length} />
 
             <div
-                className={`${styles.modalImageContainer} ${styles.smoothTransition}`}
-                onMouseDown={handleMouseDown}
-                onMouseMove={handleMouseMove}
-                onMouseUp={handleMouseUp}
-                onTouchStart={touchHandlers.handleTouchStart}
-                onTouchMove={touchHandlers.handleTouchMove}
-                onTouchEnd={touchHandlers.handleTouchEnd}
+                className={styles.modalImageContainer}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
                 style={{
                     transform: `scale(${zoom}) translate(${dragPosition.x}px, ${dragPosition.y}px)`,
-                    cursor: zoom > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default',
+                    cursor: zoom > 1 ? 'grab' : 'default',
                 }}
             >
                 <Image
@@ -104,7 +105,7 @@ export default function Modal({ images, currentIndex, onClose, onNext, onPrev })
                 />
             </div>
 
-            <ZoomControls zoomIn={zoomIn} zoomOut={zoomOut} />
+            <ZoomControls zoomIn={() => setZoom(Math.min(zoom + 0.2, 3))} zoomOut={() => setZoom(Math.max(zoom - 0.2, 1))} />
         </div>
     );
 }
