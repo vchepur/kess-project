@@ -13,7 +13,7 @@ export default function Modal({ images, currentIndex, onClose, onNext, onPrev })
     const [dragPosition, setDragPosition] = useState({ x: 0, y: 0 });
     const [startDragPosition, setStartDragPosition] = useState({ x: 0, y: 0 });
     const [isDragging, setIsDragging] = useState(false);
-    const [isClient, setIsClient] = useState(false); // Флаг клиента
+    const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {
         setIsClient(true);
@@ -68,7 +68,7 @@ export default function Modal({ images, currentIndex, onClose, onNext, onPrev })
 
     const handleMouseUp = () => setIsDragging(false);
 
-    // Используем хук, чтобы обработать тач-события только на тач-устройствах
+    // Используем хук для обработки тач-событий
     const touchHandlers = useTouchHandlers({ onNext: handleNext, onPrev: handlePrev, setZoom, zoom });
 
     if (!isClient) return null;

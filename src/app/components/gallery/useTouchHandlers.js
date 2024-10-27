@@ -11,6 +11,8 @@ export default function useTouchHandlers({ onNext, onPrev, setZoom, zoom }) {
     }, [zoom]);
 
     const handleTouchStart = (event) => {
+        console.log("Touch Start", event.touches.length);
+
         if (event.touches.length === 1) {
             setInitialTouch({ x: event.touches[0].clientX, y: event.touches[0].clientY });
             setIsSwiping(true);
@@ -24,6 +26,8 @@ export default function useTouchHandlers({ onNext, onPrev, setZoom, zoom }) {
     };
 
     const handleTouchMove = (event) => {
+        console.log("Touch Move", event.touches.length);
+
         if (!isSwiping || zoom > 1) return;
 
         if (event.touches.length === 1 && initialTouch) {
@@ -49,6 +53,8 @@ export default function useTouchHandlers({ onNext, onPrev, setZoom, zoom }) {
     };
 
     const handleTouchEnd = () => {
+        console.log("Touch End");
+
         setIsSwiping(false);
         setInitialTouch(null);
         setInitialDistance(null);
