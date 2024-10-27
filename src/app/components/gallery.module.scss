@@ -1,0 +1,74 @@
+// components/gallery.module.scss
+
+.galleryContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.largeImageContainer {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+}
+
+.thumbnailWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.thumbnailContainer {
+  display: flex;
+  overflow-x: auto;
+  gap: 5px;
+  align-items: center;
+}
+
+.sliderButton {
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  opacity: 0;
+  position: absolute;
+  transition: opacity 0.3s;
+  z-index: 2;
+}
+
+.thumbnailWrapper:hover .sliderButton {
+  opacity: 1;
+}
+
+.sliderButton:first-of-type {
+  left: 5px;
+}
+
+.sliderButton:last-of-type {
+  right: 5px;
+}
+
+/* На мобильных устройствах кнопки всегда видны */
+@media (max-width: 767px) {
+  .sliderButton {
+    opacity: 1;
+  }
+}
+
+.thumbnail {
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border 0.3s ease;
+}
+
+.thumbnail.active {
+  border-color: #0070f3;
+}
