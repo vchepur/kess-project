@@ -1,0 +1,119 @@
+
+
+.footer {
+  background-color: #3a3d3e; /* Темный синий фон */
+  color: #9A9EA5; /* Основной цвет текста */
+  font-weight: 500; /* Базовая толщина для всего текста */
+  font-size: 16px; /* Базовый размер для всего текста */
+  line-height: 19px; /* Базовое межстрочное расстояние */
+  letter-spacing: 0.01em; /* Межбуквенное расстояние для всего текста */
+
+
+  .container {
+    display: flex;
+    justify-content: center; /* Распределение колонок */
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+
+  .linksSection, .contactSection, .informationSection {
+    max-width: 250px;
+    margin: 20px;
+    width: 200px;
+  }
+
+  /* Планшетная версия */
+  @media (max-width: 1024px) {
+    .container {
+      justify-content: center; /* Центрирование колонок на планшете */
+    }
+
+    .linksSection, .contactSection, .informationSection {
+      max-width: 45%; /* Колонки становятся шире, чтобы занимать половину экрана */
+      margin-bottom: 20px;
+    }
+  }
+
+  /* Мобильная версия */
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column; /* Вертикальное расположение колонок */
+      align-items: center;
+    }
+
+    .linksSection, .contactSection, .informationSection {
+      max-width: 100%; /* Каждая колонка занимает 100% ширины */
+      text-align: center; /* Центрирование текста на мобильных устройствах */
+      margin-bottom: 0;
+    }
+  }
+
+  /* Стили для логотипа и основного текста */
+
+
+  /* Общие стили для всех текстовых элементов (списки, ссылки, параграфы) */
+  .linksSection, .contactSection {
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        margin-bottom: 10px;
+
+        a {
+          color: #9A9EA5; /* Основной цвет ссылок */
+          display: inline-block;
+          text-decoration: none;
+          transition: color 0.2s ease-in-out; /* Плавный переход для изменения цвета */
+
+          &:hover {
+            color: #fff; /* При наведении цвет ссылки становится белым */
+          }
+        }
+      }
+    }
+
+    p {
+      margin-bottom: 10px;
+      opacity: 0.8; /* Прозрачность текста */
+    }
+  }
+
+  /* Стили для заголовков категорий */
+  .linksSection h3, .contactSection h3 {
+    font-size: 20px; /* Увеличенный размер для заголовков */
+    color: #fff; /* Белый цвет для заголовков */
+    font-weight: 600; /* Жирность заголовков */
+    margin-bottom: 15px;
+    letter-spacing: 0.1em; /* Межбуквенное расстояние */
+  }
+
+  /* Социальные иконки */
+  .socialIcons {
+    display: flex;
+    justify-content: center; /* Центрирование иконок по горизонтали */
+    gap: 15px; /* Промежуток между иконками */
+    margin-top: 15px;
+
+    a img {
+      width: 30px; /* Размер иконок */
+      height: 30px;
+    }
+  }
+
+  /* Нижняя секция с копирайтом */
+  .socialSection {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    border-top: 1px solid #4a4e50;
+    margin-top: 20px;
+
+    p {
+      text-align: center;
+      opacity: 0.8;
+    }
+  }
+}

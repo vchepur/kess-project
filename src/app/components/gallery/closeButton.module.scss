@@ -1,0 +1,19 @@
+/* closeButton.module.scss */
+
+.closeButton {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  color: #ffffff;
+  border: none;
+  padding: 9px 12px;
+  background-color: rgba(34, 34, 34, 0.8);
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 200;
+  transition: background-color 0.3s ease;
+}
+
+.closeButton:hover {
+  background-color: rgba(39, 92, 223, 0.8);
+}

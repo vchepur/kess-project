@@ -1,0 +1,27 @@
+// src/app/not-found.module.scss
+
+.container {
+  background-color: #ffffff; // Белый фон
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #333; // Темный текст
+  text-align: center;
+}
+
+.heading {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.link {
+  color: #0070f3; // Синий цвет ссылки (как у Next.js)
+  text-decoration: underline;
+  font-size: 1.2rem;
+}
+
+.link:hover {
+  text-decoration: none;
+  color: #005bb5;
+}

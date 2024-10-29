@@ -1,0 +1,41 @@
+.skeletonLoader {
+  width: 100%;
+  max-width: 1200px;
+  height: 600px;
+  margin: 0 auto;
+  background-color: #e0e0e0;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 1.5s infinite ease-in-out;
+
+  @media (max-width: 768px) {
+    height: 300px;
+  }
+}
+
+.skeletonBody {
+  width: 90%;
+  height: 400px;
+  background-color: #cccccc;
+  border-radius: 8px;
+
+  @media (max-width: 768px) {
+    height: 250px;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    background-color: #f0f0f0;
+  }
+  50% {
+    background-color: #e0e0e0;
+  }
+  100% {
+    background-color: #f0f0f0;
+  }
+}

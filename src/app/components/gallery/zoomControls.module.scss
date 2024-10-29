@@ -1,0 +1,27 @@
+/* zoomControls.module.scss */
+
+.zoomControls {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  display: flex;
+  gap: 10px;
+  background-color: rgba(34, 34, 34, 0.8);
+  padding: 10px;
+  border-radius: 8px;
+  z-index: 200;
+  transition: background-color 0.3s ease;
+}
+
+.zoomControls button {
+  color: #fff;
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.zoomControls:hover {
+  background-color: rgba(39, 92, 223, 0.8);
+}
+
