@@ -50,7 +50,7 @@ export default function Footer() {
 
             </div>
             <div className={styles.socialSection}>
-                <p>&copy; 2024 KESSLER Boote & Meer.</p>
+                <p>&copy; 2016-2024 KESSLER Boote & Meer.</p>
             </div>
         </footer>
     );

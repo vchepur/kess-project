@@ -6,7 +6,7 @@ export default function NavigationButton({ direction, onClick }) {
             className={direction === "left" ? styles.modalArrowLeft : styles.modalArrowRight}
             onClick={onClick}
         >
-            {direction === "left" ? "←" : "→"}
+            {direction === "left" ? "<" : ">"}
         </button>
     );
 }

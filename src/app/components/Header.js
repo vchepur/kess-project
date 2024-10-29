@@ -1,6 +1,5 @@
-// components/Header.js
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styles from './Header.module.scss';
 
@@ -14,6 +13,20 @@ export default function Header() {
     const closeMenu = () => {
         setIsBurgerOpen(false);
     };
+
+    // Отключение прокрутки страницы при открытии меню
+    useEffect(() => {
+        if (isBurgerOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+
+        // Восстановление overflow при размонтировании компонента
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
+    }, [isBurgerOpen]);
 
     return (
         <header className={styles.header}>

@@ -1,9 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 
 .footer {
-  background-color: #343C4B; /* Темный синий фон */
+  background-color: #3a3d3e; /* Темный синий фон */
   color: #9A9EA5; /* Основной цвет текста */
-  font-family: "Inter", sans-serif; /* Базовый шрифт для всего текста */
   font-weight: 500; /* Базовая толщина для всего текста */
   font-size: 16px; /* Базовый размер для всего текста */
   line-height: 19px; /* Базовое межстрочное расстояние */
@@ -109,7 +108,7 @@
     display: flex;
     justify-content: center;
     padding-top: 10px;
-    border-top: 1px solid #4B576C;
+    border-top: 1px solid #4a4e50;
     margin-top: 20px;
 
     p {
