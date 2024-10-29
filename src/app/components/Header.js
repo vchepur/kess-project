@@ -53,14 +53,15 @@ export default function Header() {
                 {/* Контактный блок с телефоном */}
                 <div className={styles.contact}>
                     <div className={styles.phoneDropdown}>
-                        <p>+49 162 987 28 71</p>
+                        <p>+49 162 987 28 71 (EU)</p>
                         <span className={styles.arrow}></span>
                     </div>
                     {/* Выпадающее меню появляется по наведению благодаря CSS */}
                     <div className={styles.dropdownMenu}>
-                        <p>Email: info@kessler-boote.com</p>
-                        <p>Adresse 1: Gewerbestraße 6/1, D-78244 Gottmadingen</p>
-                        <p>Adresse 2: Gotenstraße 50, D-56567 Neuwied</p>
+                        <p>info@kessler-boote.com</p>
+                        <p>EU: +49 162 987 28 71</p>
+                        <p>CH: +41 76 400 67 17</p>
+                        <p>DE-78345, Gewerbestraße 20, Moos</p>
                         <p>Открыть страницу контактов</p>
                     </div>
                 </div>
@@ -84,9 +85,10 @@ export default function Header() {
                             <li><a href="/service" onClick={closeMenu}>Dienst</a></li>
                             <li><a href="/contacts" onClick={closeMenu}>Kontakt</a></li>
                             <div className={styles.BurgerMenuContactsMini}>
-                                <p>+49 162 987 28 71</p>
                                 <p>info@kessler-boote.com</p>
-                                <p>Gewerbestraße 6/1, D-78244 Gottmadingen</p>
+                                <p>EU: +49 162 987 28 71</p>
+                                <p>CH: +41 76 400 67 17</p>
+                                <p>DE-78345, Gewerbestraße 20, Moos</p>
                             </div>
                         </ul>
                     </div>

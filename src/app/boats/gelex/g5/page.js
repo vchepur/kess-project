@@ -90,7 +90,7 @@ export default function BoatPage() {
 
     return (
         <div className={styles.boatPage}>
-            <h1>Gelex G4.5</h1>
+            <h1>Gelex G5</h1>
             <Gallery images={images}/>
 
             <h2>Informationen</h2>

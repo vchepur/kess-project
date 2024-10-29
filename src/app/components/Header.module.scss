@@ -77,11 +77,11 @@
 
 .contact .dropdownMenu {
   position: absolute;
-  top: 40px;
-  right: 0;
+  top: 55px;
+  left: 20px;
   width: 220px;
   padding: 15px;
-  background-color: rgba(198, 198, 198, 0.8);
+  background-color: rgba(51, 51, 51, 0.8);
   backdrop-filter: blur(5px);
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -107,6 +107,12 @@
   display: none;
 }
 /* Мобильная и планшетная версия */
+@media (max-width: 1250px) {
+  .contact {
+    display: none;
+  }
+}
+
 @media (max-width: 1024px) {
   .headerContainer {
     justify-content: space-between;
