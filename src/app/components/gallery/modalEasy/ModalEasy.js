@@ -14,11 +14,17 @@ export default function ModalEasy({ image, alt, onClose }) {
 
     useEffect(() => {
         setIsClient(true);
+        document.body.style.overflow = 'hidden'; // Отключаем прокрутку при открытии
+
         const handleKeyDown = (event) => {
             if (event.key === 'Escape') onClose();
         };
         window.addEventListener('keydown', handleKeyDown);
-        return () => window.removeEventListener('keydown', handleKeyDown);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+            document.body.style.overflow = 'auto'; // Включаем прокрутку при закрытии
+        };
     }, [onClose]);
 
     const resetZoomAndPosition = () => {
@@ -78,7 +84,6 @@ export default function ModalEasy({ image, alt, onClose }) {
                     <Image
                         src={image}
                         alt={alt}
-                        // layout="responsive"
                         width={1200}
                         height={800}
                         style={{ objectFit: 'contain' }}
