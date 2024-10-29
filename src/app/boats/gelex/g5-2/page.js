@@ -46,7 +46,7 @@ const boatConfigSteps = [
         options: [
             { name: 'Basis A', price: 500, image: '/test/1.png' },
             { name: 'Basis B', price: 700, image: '/test/2.png' },
-            { name: 'Basis B', price: 700, image: '/test/3.png' },
+            { name: 'Basis C', price: 700, image: '/test/3.png' },
         ],
     }
 ];
