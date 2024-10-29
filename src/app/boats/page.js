@@ -12,7 +12,7 @@ export default function Boats() {
                 <h2>Gelex</h2>
                 <div className={styles.boatList}>
                     <Link href="/boats/gelex/g4" className={styles.boatItem}>
-                        <Image src="/boats/gelex/G4-5/G4.5_02-0-min.png" alt="Gelex G4" width={200} height={150}/>
+                        <Image src="/boats/gelex/g4-5/G4.5_02-0-min.png" alt="Gelex G4" width={200} height={150}/>
                         <h3>Gelex G4</h3>
                         <p>Länge (cm): 395</p>
                         <p>Breite (cm): 165</p>
@@ -21,7 +21,7 @@ export default function Boats() {
 
                     </Link>
                     <Link href="/boats/gelex/g4-5" className={styles.boatItem}>
-                        <Image src="/boats/gelex/G4-5/G4.5_02-0-min.png" alt="Gelex G4.5" width={200} height={150} />
+                        <Image src="/boats/gelex/g4-5/G4.5_02-0-min.png" alt="Gelex G4.5" width={200} height={150} />
                         <h3>Gelex G4.5</h3>
                         <p>Länge (cm): 450</p>
                         <p>Breite (cm): 180</p>
@@ -29,7 +29,7 @@ export default function Boats() {
                         <p>Passagierkapazität (Personen): 4</p>
                     </Link>
                     <Link href="/boats/gelex/g5" className={styles.boatItem}>
-                        <Image src="/boats/gelex/G4-5/G4.5_02-0-min.png" alt="Gelex G5" width={200} height={150} />
+                        <Image src="/boats/gelex/g4-5/G4.5_02-0-min.png" alt="Gelex G5" width={200} height={150} />
                         <h3>Gelex G5</h3>
                         <p>Länge (cm): 495</p>
                         <p>Breite (cm): 195</p>
@@ -37,7 +37,7 @@ export default function Boats() {
                         <p>Passagierkapazität (Personen): 4</p>
                     </Link>
                     <Link href="/boats/gelex/g5-2" className={styles.boatItem}>
-                        <Image src="/boats/gelex/G4-5/G4.5_02-0-min.png" alt="Gelex G5.2" width={200} height={150} />
+                        <Image src="/boats/gelex/g4-5/G4.5_02-0-min.png" alt="Gelex G5.2" width={200} height={150} />
                         <h3>Gelex G5.2</h3>
                         <p>Länge (cm): 515</p>
                         <p>Breite (cm): 205</p>
@@ -45,7 +45,7 @@ export default function Boats() {
                         <p>Passagierkapazität (Personen): 5</p>
                     </Link>
                     <Link href="/boats/gelex/g5-5" className={styles.boatItem}>
-                        <Image src="/boats/gelex/G4-5/G4.5_02-0-min.png" alt="Gelex G5.5" width={200} height={150} />
+                        <Image src="/boats/gelex/g4-5/G4.5_02-0-min.png" alt="Gelex G5.5" width={200} height={150} />
                         <h3>Gelex G5.5</h3>
                         <p>Coming soon</p>
                     </Link>
