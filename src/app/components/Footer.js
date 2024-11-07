@@ -13,9 +13,8 @@ export default function Footer() {
                     <h3>Informationen</h3>
                     <ul>
                         <li><a href="/guarantee">Garantie</a></li>
-                        <li><a href="/blog">Blog</a></li>
-                        <li><a href="/contact">Kontakt</a></li>
-                        <li><a href="/impressum">Impressum</a></li>
+                        <li><a href="/contacts">Kontakt</a></li>
+                        <li><a href="/legacy">Impressum</a></li>
                         <li><a href="/privacy">Datenschutz</a></li>
                     </ul>
                 </div>

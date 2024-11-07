@@ -7,11 +7,11 @@ import styles from './boatPage.module.scss';
 import BoatConfigurator from '/src/app/components/configurator/BoatConfigurator';
 
 const images = [
-    { src: '/boats/gelex/g4-5/1.jpg', alt: 'Boot 1' },
-    { src: '/boats/gelex/g4-5/2.jpg', alt: 'Boot 2' },
-    { src: '/boats/gelex/g4-5/3.jpg', alt: 'Boot 3' },
-    { src: '/boats/gelex/g4-5/4.jpg', alt: 'Boot 4' },
-    { src: '/boats/gelex/g4-5/5.jpg', alt: 'Boot 5' },
+    { src: '/boats/gelex/g5/g5-1.png', alt: 'Photo 1' },
+    { src: '/boats/gelex/g5/g5-2.png', alt: 'Photo 2' },
+    { src: '/boats/gelex/g5/g5-3.png', alt: 'Photo 3' },
+    { src: '/boats/gelex/g5/g5-4.png', alt: 'Photo 4' },
+    { src: '/boats/gelex/g5/g5-5.png', alt: 'Photo 5' },
 ];
 
 const colors = [

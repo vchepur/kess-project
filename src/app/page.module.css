@@ -1,100 +1,167 @@
-/* Контейнер для контента */
+/* Общий контейнер */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
 }
 
-/* Первый блок с короткой информацией */
+/* Первый блок с приветствием */
 .infoSection {
   background-color: #f7f7f7;
   padding: 50px 0;
   text-align: center;
+  border-radius: 20px;
+
+  .welcomeTitle {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  .welcomeText {
+    font-size: 18px;
+    color: #555;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+  }
 }
 
-.infoSection h1 {
-  font-size: 36px;
-  margin-bottom: 20px;
-}
-
-.infoSection p {
-  font-size: 18px;
-  color: #555;
-}
-
-/* Второй блок с логотипами */
-.distributorSection {
-  background-color: #fff;
-  padding: 50px 0;
-  text-align: center;
-}
-
-.distributorSection h2 {
-  font-size: 30px;
-  color: #333;
-  margin-bottom: 30px;
-}
-
-.logos {
-  display: flex;
-  justify-content: center;
-  gap: 10px; /* Отступы между логотипами */
-}
-
-.logoItem {
-  background-color: #f1f1f1; /* Светло-серый фон для логотипов */
-  width: 300px; /* Фиксированный размер квадрата */
-  height: 300px; /* Фиксированный размер квадрата */
-  border-radius: 10px; /* Закругленные углы */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень */
-  transition: transform 0.3s ease;
-}
-
-.logoItem img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain; /* Гарантирует, что логотип будет полностью помещен в квадрат */
-}
-
-.logoItem:hover {
-  transform: scale(1.05); /* Увеличение логотипа при наведении */
-}
-
-/* Третий блок - текст и фото */
+/* Второй блок - О бренде и преимуществах */
 .aboutSection {
+  background-color: #ffffff;
+  padding: 50px 0;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+
+  .textContent {
+    flex: 1;
+
+    .aboutTitle {
+      font-size: 30px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .aboutText {
+      font-size: 18px;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+  }
+
+  .imageContent {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+
+    .aboutImage {
+      width: 100%;
+      max-width: 800px;
+      height: auto;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+  }
+
+  /* Адаптация для мобильных устройств */
+  @media (max-width: 768px) {
+    flex-direction: column;
+    .imageContent, .textContent {
+      flex: unset;
+      text-align: center;
+    }
+  }
+}
+
+/* Третий блок - Лодки и фото */
+.boatsSection {
   background-color: #f7f7f7;
   padding: 50px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  text-align: center;
+  border-radius: 20px;
+
+  .boatsTitle {
+    font-size: 30px;
+    color: #333;
+    margin-bottom: 30px;
+  }
+
+  .boatsDescription {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 30px;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .boatsGallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+
+    .boatItem {
+      width: 100%;
+      max-width: 300px;
+      text-align: center;
+
+      .boatImage {
+        width: 100%;
+        height: 200px;
+        border-radius: 10px;
+        object-fit: cover;
+      }
+
+      .boatText {
+        margin-top: 10px;
+        font-size: 16px;
+        color: #555;
+      }
+    }
+  }
+
+  /* Адаптация для мобильных устройств */
+  @media (max-width: 768px) {
+    .boatsGallery {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
 }
 
-.textContent {
-  flex: 1;
-  margin-right: 20px;
+/* Четвертый блок - О нас */
+.finalSection {
+  background-color: #ffffff;
+  padding: 50px 0;
+  text-align: center;
+
+  .finalTitle {
+    font-size: 30px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  .finalText {
+    font-size: 18px;
+    color: #555;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
 }
 
-.textContent h2 {
-  font-size: 30px;
-  color: #333;
-  margin-bottom: 20px;
-}
+/* Общие адаптации для мобильных устройств */
+@media (max-width: 768px) {
+  .welcomeTitle {
+    font-size: 28px;
+  }
 
-.textContent p {
-  font-size: 18px;
-  color: #555;
-}
-
-.imageContent {
-  flex: 1;
-}
-
-.imageContent img {
-  width: 100%; /* Либо можно установить фиксированный размер */
-  height: auto; /* Автоматическая высота */
-  border-radius: 10px; /* Добавим закругление */
-  object-fit: cover; /* Чтобы изображение корректно вписывалось */
+  .welcomeText, .aboutText, .boatsDescription, .finalText {
+    font-size: 16px;
+    padding: 0 15px;
+  }
 }
